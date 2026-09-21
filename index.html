@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Today's Favorite Card</title>
+    <style>
+      :root {
+        --bg-dark: #121212;
+        --bg-mid: #1d1d1d;
+        --panel: rgba(255, 255, 255, 0.08);
+        --text: #f5f5f5;
+        --accent: #d9d9d9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+        color: var(--text);
+        background:
+          repeating-linear-gradient(
+            135deg,
+            var(--bg-dark) 0,
+            var(--bg-dark) 20px,
+            var(--bg-mid) 20px,
+            var(--bg-mid) 40px
+          );
+      }
+
+      .container {
+        width: min(90vw, 800px);
+        padding: 30px;
+      }
+
+      .box {
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        padding: 24px 28px;
+        margin: 18px 0;
+      }
+
+      h1 {
+        font-size: clamp(2.2rem, 6vw, 4rem);
+        line-height: 1.1;
+        margin: 0;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      p {
+        font-size: clamp(1.1rem, 2vw, 1.5rem);
+        line-height: 1.6;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <section class="box">
+        <h1>TODAY'S FAVORITE CARD</h1>
+      </section>
+
+      <section class="box">
+        <p>This is a placeholder for the card text. Add your favorite card message here.</p>
+      </section>
+    </main>
+  </body>
+</html>
