@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Today's Favorite Card</title>
+
+    <!--
+      This page is a simple static card UI with a name field.
+      It keeps the layout lightweight and avoids a build tool.
+      The Firebase logic is loaded separately so the page stays easy to maintain.
+    -->
     <style>
       :root {
         --bg-dark: #121212;
@@ -105,6 +111,10 @@
         <h1>TODAY'S FAVORITE CARD</h1>
       </section>
 
+      <!--
+        The name field is the primary UI element.
+        The page updates the displayed card text as the user types.
+      -->
       <section class="box field">
         <label for="nameInput">Your name</label>
         <input id="nameInput" type="text" maxlength="50" placeholder="Enter your name" />
@@ -116,6 +126,12 @@
       </section>
     </main>
 
+    <!--
+      Third-party scripts are loaded in order:
+      1. Firebase app and Firestore compatibility libraries
+      2. the project configuration object
+      3. the app logic that handles save/load behavior
+    -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     <script src="firebase-config.js"></script>

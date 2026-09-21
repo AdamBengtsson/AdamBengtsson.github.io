@@ -1,9 +1,19 @@
 (function () {
+  /**
+   * This file contains the browser-side behavior for the name field.
+   *
+   * The page keeps a lightweight static UI, while this script handles:
+   * - reading the saved value from storage
+   * - initializing Firebase when config is available
+   * - saving the current name to Firestore
+   * - falling back to localStorage if Firebase is not usable
+   */
   const STORAGE_KEY = "favorite-card-name";
   const nameInput = document.getElementById("nameInput");
   const statusText = document.getElementById("status");
   const cardText = document.getElementById("cardText");
 
+  // Firebase config is provided by firebase-config.js and attached to window.
   const config = window.firebaseConfig || {};
   const hasValidConfig = Object.values(config).every(
     (value) => typeof value === "string" && value.trim() && !value.startsWith("YOUR_")
@@ -22,6 +32,10 @@
   const db = hasValidConfig && window.firebase && firebase.firestore ? firebase.firestore() : null;
   const profileDoc = db ? db.collection("profile").doc("currentName") : null;
 
+  /**
+   * Keep a browser fallback in localStorage so the page still works even when
+   * Firebase is unavailable or the config has not yet been completed.
+   */
   function saveLocalName(value) {
     const trimmedValue = (value || "").trim();
     if (trimmedValue) {
@@ -40,6 +54,9 @@
     }
   }
 
+  /**
+   * Keep the displayed card text in sync with the current input value.
+   */
   function updateCardMessage(name) {
     const trimmedValue = (name || "").trim();
     if (!trimmedValue) {
@@ -54,6 +71,10 @@
     statusText.textContent = message;
   }
 
+  /**
+   * Load the latest saved name from Firestore when possible.
+   * If Firebase is not ready, reuse the browser fallback value.
+   */
   async function loadSavedName() {
     const fallbackName = loadLocalName();
     nameInput.value = fallbackName;
@@ -82,6 +103,9 @@
     }
   }
 
+  /**
+   * Save the current value to both browser storage and Firestore when available.
+   */
   async function saveName() {
     const trimmedValue = (nameInput.value || "").trim();
     saveLocalName(trimmedValue);
